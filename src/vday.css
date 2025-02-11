@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 16px;
+    height: 100vh;
+    background: #ffc0cb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.valentines_card {
+    position: relative;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transform: perspective(2500px);
+    transition: transform 2s ease-in-out;
+    width: 400px;
+    height: 600px;
+}
+
+.valentines_card:active .front_card {
+    transform: rotateY(-140deg);
+}
+
+.front_card, .inside_card {
+    position: absolute;
+    overflow: hidden;
+    margin: auto;
+    padding: 16px;
+    background-color: whitesmoke;
+    text-align: center;
+    box-shadow: 0 12px 20px -8px #ff1493;
+    width: 100%;
+    height: 100%;
+    transform-origin: left;
+    border-radius: 10px;
+}
+
+.front_img, .inside_img {
+    width: 100%;
+    max-width: 350px;
+    margin: auto;
+    display: block;
+}
+
+.front_text, .inside_text {
+    color: #A60657;
+    font-family: 'Brush Script MT', cursive;
+    font-size: 22px;
+}
+
+.inside_card {
+    z-index: -1;
+    left: 0;
+    top: 0;
+}
+
+.valentines_card audio {
+    display: none;
+}
+
+.inside_card audio {
+    display: flex;
+    justify-content: center;
+    margin: 10px auto;
+}
+
+/* تحسين للهواتف المحمولة */
+@media (max-width: 768px) {
+    .valentines_card {
+        width: 300px;
+    }
+    
+    .front_text, .inside_text {
+        font-size: 18px;
+    }
+}
