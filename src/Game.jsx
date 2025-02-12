@@ -52,6 +52,7 @@ const Game = () => {
     <div className="game-container">
       {stage === 1 && (
         <div className="heart-stage">
+          <img src="/peach-and.gif" alt="GIF" width="200PX" />
           <h2>اجمع القلوب حتى تصل إلى 5! ❤️</h2>
           <p>القلوب المجمعة: {heartsCollected}/5</p>
           <span
