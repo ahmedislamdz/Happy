@@ -1,34 +1,32 @@
 import React, { useState, useEffect } from "react";
 import "./styles.css";
-import "./vday.css"
 
 const Game = () => {
   const [stage, setStage] = useState(1);
   const [heartsCollected, setHeartsCollected] = useState(0);
   const [heartPosition, setHeartPosition] = useState({ x: 50, y: 50 });
   const [noClicks, setNoClicks] = useState(0);
-  const [yesClicks, setYesClicks] = useState(0);
+  const [isCardOpen, setIsCardOpen] = useState(false); // حالة فتح البطاقة
 
   const tenorEmbeds = [
-    ["/manja.gif", "روان اضغط على نعم ❤️"],
-    ["/No1.gif", "روان اضغط على نعم من فضلك 🙏"],
-    ["/No2.gif", "روان اضغط على نعم متقلقنيش 😭"],
+    ["/manja.gif", "اضغط على نعم ❤️"],
+    ["/No1.gif", "اضغط على نعم من فضلك 🙏"],
+    ["/No2.gif", "اضغط على نعم متقلقنيش 😭"],
     ["/yes.gif", "اضغط على نعم وبلعي 😘"]
   ];
 
   useEffect(() => {
-    if (heartsCollected < 5) {
-      setHeartPosition({
-        x: Math.random() * 80 + 10,
-        y: Math.random() * 80 + 10
-      });
-    } else {
+    if (heartsCollected === 5) {
       setStage(2);
     }
   }, [heartsCollected]);
 
   const handleHeartClick = () => {
     setHeartsCollected(heartsCollected + 1);
+    setHeartPosition({
+      x: Math.random() * 80 + 10,
+      y: Math.random() * 80 + 10
+    });
   };
 
   const handleNoClick = (e) => {
@@ -43,11 +41,11 @@ const Game = () => {
   };
 
   const handleYesClick = () => {
-    if (yesClicks < 0) {
-      setStage(4);
-    } else {
-      setStage(4);
-    }
+    setStage(3);
+  };
+
+  const handleCardClick = () => {
+    setIsCardOpen(!isCardOpen); // تبديل حالة فتح البطاقة
   };
 
   return (
@@ -67,7 +65,7 @@ const Game = () => {
       {stage === 2 && (
         <div className="question-stage">
           <h1>هل تحبني؟ 😍</h1>
-          <img src={tenorEmbeds[noClicks][0]} alt="GIF" width="300px" />
+          <img src={tenorEmbeds[noClicks][0]} alt="GIF" width="200PX" />
           <h2>{tenorEmbeds[noClicks][1]}</h2>
           <div className="btn">
             <button onClick={handleYesClick}>نعم</button>
@@ -78,29 +76,37 @@ const Game = () => {
         </div>
       )}
 
-{stage === 4 && (
-  <div className="valentines_card">
-    <div className="front_card">
-      <img src="/vday.png" className="front_img" alt="Valentine Front" />
-      <div className="front_text">
-        <h3>إليك رسالة مليئة بالحب والمودة...</h3>
-      </div>    
-    </div>
-    <div className="inside_card">
-      <img src="/inside.png" className="inside_img" alt="Valentine Inside" />
-      <div>
-        <audio controls autoPlay>
-          <source src="/MadeForMe.mp3" type="audio/mp3" />
-          متصفحك لا يدعم تشغيل الصوت.
-        </audio>  
-      </div>
-      <div className="inside_text">
-        <h4>...من قلب يعشقك أكثر مما تستطيع الكلمات أن تصف! 💖</h4>
-        <h3>أتمنى لك حياة طيبة  واجمل وحب مليئًا بالسعادة والدفء، تمامًا كما تملأ حياتي حبًا وفرحًا! ❤️</h3>
-      </div>
-    </div>
-  </div>
-)}
+      {stage === 3 && (
+        <div className={`valentines_card ${isCardOpen ? "open" : ""}`} onClick={handleCardClick}>
+          <div className="front_card">
+            <img src="/vday.png" className="front_img" alt="Valentine Front" />
+            <div className="front_text">
+              <h3>اضغط لفتح البطاقة ❤️</h3>
+            </div>
+          </div>
+          <div className="inside_card">
+            <img src="/inside.png" className="inside_img" alt="Valentine Inside" />
+            <div>
+              <audio controls autoPlay>
+                <source src="/MadeForMe.mp3" type="audio/mp3" />
+                متصفحك لا يدعم تشغيل الصوت.
+              </audio>
+            </div>
+            <div className="inside_text">
+              <h4>...من قلب يعشقك أكثر مما تستطيع الكلمات أن تصف! 💖</h4>
+              <h3>أتمنى لك حياة طيبة واجمل وحب مليئًا بالسعادة والدفء، تمامًا كما تملأ حياتي حبًا وفرحًا! ❤️</h3>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {stage === 4 && (
+        <div className="final-stage">
+          <h1>مبروك! لقد أكملت اللعبة! 🎉</h1>
+          <img src="/celebration.gif" alt="Celebration" width="300px" />
+          <p>شكرًا لك على مشاركتك في هذه التجربة الرائعة! 💖</p>
+        </div>
+      )}
     </div>
   );
 };

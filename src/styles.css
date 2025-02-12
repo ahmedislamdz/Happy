@@ -1,52 +1,47 @@
-#root{
-    margin: auto;
-}
 body {
-    background-color: rgb(255, 204, 221);
-    text-align: center;
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    margin: auto;
-}
-
-.game-container {
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .game-container {
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
     justify-content: center;
-}
-
-.heart-stage, .quiz-stage, .card-stage {
+  }
+  
+  .heart-stage, .question-stage, .valentines_card, .final-stage {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.heart {
+    text-align: center;
+  }
+  
+  .heart {
     font-size: 50px;
     cursor: pointer;
     position: absolute;
     transition: transform 0.2s;
-}
-
-.heart:hover {
+  }
+  
+  .heart:hover {
     transform: scale(1.2);
-}
-
-.quiz-stage form {
+  }
+  
+  .btn {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.quiz-stage div {
-    margin: 10px 0;
-}
-
-button {
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  button {
     background: linear-gradient(to right, #ff416c, #ff4b2b);
     color: white;
     padding: 10px 20px;
@@ -54,26 +49,104 @@ button {
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-    margin: 10px; /* إضافة مسافة بين الأزرار */
-}
-
-button:hover {
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
     background-color: darkred;
-}
-
-.card-stage img {
-    width: 80%;
-    max-width: 300px;
+  }
+  
+  .valentines_card {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    perspective: 2500px;
+  }
+  
+  .front_card, .inside_card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 12px 20px -8px rgba(255, 20, 147, 0.5);
+    backface-visibility: hidden;
+    transition: transform 1s ease-in-out;
+  }
+  
+  .front_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .valentines_card.open .front_card {
+    transform: rotateY(-140deg);
+  }
+  
+  .front_img, .inside_img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .front_text, .inside_text {
+    color: #ff1493;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .inside_card {
+    transform: rotateY(180deg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .valentines_card.open .inside_card {
+    transform: rotateY(0deg);
+  }
+  
+  audio {
     margin-top: 20px;
-}
-
-@media (max-width: 600px) {
-    .heart {
-        font-size: 40px;
+  }
+  
+  .final-stage {
+    text-align: center;
+  }
+  
+  .final-stage img {
+    width: 300px;
+    height: 300px;
+    margin-bottom: 20px;
+  }
+  
+  /* تحسين للهواتف المحمولة */
+  @media (max-width: 768px) {
+    .valentines_card {
+      width: 300px;
+      height: 450px;
     }
-
-    button {
-        font-size: 14px;
-        padding: 8px 16px;
+  
+    .front_img, .inside_img {
+      width: 150px;
+      height: 150px;
     }
-}
+  
+    .front_text, .inside_text {
+      font-size: 20px;
+    }
+  
+    .final-stage img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+  
